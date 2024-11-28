@@ -24,6 +24,6 @@ public class MovementT : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(horizontal * speed, vertical * speed);
+        rb.linearVelocity = new Vector2(horizontal * speed, vertical * speed);
     }
 }

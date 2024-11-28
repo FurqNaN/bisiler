@@ -73,15 +73,15 @@ public class Movement : MonoBehaviour
 
         if (jumpBufferCounter > 0f && coyoteTimeCounter > 0f)
         {
-            rb.velocity = new Vector2(rb.velocity.x, jump);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, jump);
             jumpBufferCounter = 0;
             animator.SetBool("isJumping", true);
             Invoke("OnLanding", 0.5f);
         }
 
-        if(Input.GetButtonUp("Jump") && rb.velocity.y > 0f)
+        if(Input.GetButtonUp("Jump") && rb.linearVelocity.y > 0f)
         {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, rb.linearVelocity.y * 0.5f);
             coyoteTimeCounter = 0f;
         }
 
@@ -102,7 +102,7 @@ public class Movement : MonoBehaviour
     {
         if(!isWallJumping)
         {
-            rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
+            rb.linearVelocity = new Vector2(horizontal * speed, rb.linearVelocity.y);
         }
         
        
@@ -139,7 +139,7 @@ public class Movement : MonoBehaviour
         if(IsWalled() && !IsGrounded() && horizontal != 0f)
         {
             isWallSliding = true;
-            rb.velocity = new Vector2(rb.velocity.x, Mathf.Clamp(rb.velocity.y, -wallSlidingSpeed, float.MaxValue));
+            rb.linearVelocity = new Vector2(rb.linearVelocity.x, Mathf.Clamp(rb.linearVelocity.y, -wallSlidingSpeed, float.MaxValue));
             animator.SetBool("isWallin", true);
         }
         else
@@ -167,7 +167,7 @@ public class Movement : MonoBehaviour
         if(Input.GetButtonDown("Jump") && wallJumpingCounter > 0f)
         {
             isWallJumping = true;
-            rb.velocity = new Vector2(wallJumpingDirection * wallJumpingPower.x, wallJumpingPower.y);
+            rb.linearVelocity = new Vector2(wallJumpingDirection * wallJumpingPower.x, wallJumpingPower.y);
             wallJumpingCounter = 0f;
             if(transform.localScale.x != wallJumpingDirection)
             {
